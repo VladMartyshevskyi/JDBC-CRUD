@@ -17,7 +17,7 @@ public class JdbcCrudApplication {
 	}
 	
 	@Bean
-    public UserDao AuthenticationFilter() {
+    public UserDao getUserDaoBean() {
         return new JdbcTemplateUserDaoImpl();
     }
 }
