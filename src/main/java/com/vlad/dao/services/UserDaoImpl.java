@@ -10,21 +10,21 @@ import com.vlad.dao.interfaces.UserDao;
 import com.vlad.dao.models.Role;
 import com.vlad.dao.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 public class UserDaoImpl implements UserDao {
-
-	@Autowired
-	private DataSource dataSource;
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 
 	private static final String QUERY_INSERT = "INSERT INTO Users (name, lastName, role) VALUES (?,?,?)";
 	private static final String QUERY_UPDATE = "UPDATE Users SET name = ?, lastName = ?, role = ? WHERE id = ?";
 	private static final String QUERY_SELECT_ALL = "SELECT * FROM Users";
 	private static final String QUERY_SELECT_BY_ID = "SELECT * FROM Users WHERE id = ?";
 	private static final String QUERY_DELETE_BY_ID = "DELETE FROM Users WHERE id = ?";
+
+	@Autowired
+	@Qualifier("firstDBTemplate")
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void add(User user) {
